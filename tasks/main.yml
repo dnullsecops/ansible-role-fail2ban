@@ -1,0 +1,26 @@
+---
+- name: "Fail2ban - install"
+  package:
+    name: fail2ban
+    state: latest
+  notify:
+  - fail2ban_enable
+  - fail2ban_start
+  tags: fail2ban_install
+
+- block:
+  - name: "Fail2ban - systemd config"
+    template:
+      src: 00-systemd.conf.j2
+      dest: /etc/fail2ban/jail.d/00-systemd.conf
+    notify: fail2ban_restart
+    tags: fail2ban_config_systemd
+
+  - name: "Fail2ban - local config"
+    template:
+      src: local.conf.j2
+      dest: /etc/fail2ban/jail.d/local.conf
+    notify: fail2ban_restart
+    tags: fail2ban_config_local
+  tags: fail2ban_config
+#- name: "Fail2ban - "

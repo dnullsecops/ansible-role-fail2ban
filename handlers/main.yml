@@ -1,0 +1,7 @@
+---
+- name: fail2ban_enable
+  service: name=fail2ban enabled=true
+- name: fail2ban_start
+  service: name=fail2ban state=started
+- name: fail2ban_restart
+  service: name=fail2ban state=restarted
