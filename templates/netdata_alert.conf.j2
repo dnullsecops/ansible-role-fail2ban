@@ -1,0 +1,9 @@
+   alarm: fail2ban_sshd
+      on: fail2ban.jails_in_jail
+  lookup: max -60s unaligned of sshd
+   units: IPs
+   every: 10s
+    crit: $this > {{ role_fail2ban.netdata_alert.crit }}
+   delay: down 5m multiplier 1.5 max 1h
+    info: number of IPs banned in last minutes
+      to: sysadmin

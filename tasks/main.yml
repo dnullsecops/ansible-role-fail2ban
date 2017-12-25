@@ -23,4 +23,22 @@
     notify: fail2ban_restart
     tags: fail2ban_config_local
   tags: fail2ban_config
-#- name: "Fail2ban - "
+
+- name: "Fail2ban - readable /var/log/fail2ban.log"
+  file:
+    path: /var/log/fail2ban.log
+    owner: root
+    group: root
+    mode: 0644
+  tags: fail2ban_log
+
+# Netdata alerting
+- block:
+  - name: "Alerts - setting Netdata alert"
+    template:
+      src: netdata_alert.conf.j2
+      dest: /etc/netdata/health.d/fail2ban.conf
+    ignore_errors: True
+    notify: netdata_restart
+  when: role_fail2ban.netdata_alert.use
+  tags: fail2ban_alert

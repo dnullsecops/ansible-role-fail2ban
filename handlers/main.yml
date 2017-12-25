@@ -5,3 +5,5 @@
   service: name=fail2ban state=started
 - name: fail2ban_restart
   service: name=fail2ban state=restarted
+- name: netdata_restart
+  service: name=netdata state=restarted
