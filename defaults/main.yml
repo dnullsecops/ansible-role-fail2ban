@@ -2,5 +2,5 @@
 # defaults file for ansible-role-fail2ban
 role_fail2ban:
   netdata_alert:
-    use: True
+    use: False
     crit: 3
